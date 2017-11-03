@@ -1,0 +1,16 @@
+body {
+  margin: auto;
+  width: 960px;
+}
+
+path {
+  fill: #ccc;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+rect {
+	fill: none;
+	stroke-width: 6px;
+	stroke:#000;
+}
