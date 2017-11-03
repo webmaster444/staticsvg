@@ -17,6 +17,9 @@ var rect = svg.append("rect")
     .attr("height", 520)
     .attr('stroke', '#000');
 
+//Number Formating
+var percentFormat = d3.format(".2s");
+var thousandForamt = d3.format(",");
 //1st chart data
 var top_data = [{
     id: 1,
@@ -147,7 +150,21 @@ for (var j = 0; j < 3; j++) {
         .attr('class', 'small_text')
         .text(function(d) {
             theTypeIs = Object.keys(d.properties)[j];
-            return theTypeIs + ' ' + Object.values(d.properties)[j];
+            var res = '';
+            switch(j) {
+                case 0:                    
+                    res = theTypeIs + ' ' + parseFloat(Object.values(d.properties)[j]).toFixed(2)+'%';        
+                    break;
+                case 1:                    
+                    res =  theTypeIs + ' ' + Object.values(d.properties)[j];
+                    break;
+                case 2:
+                    res = theTypeIs + ' ' + thousandForamt(Object.values(d.properties)[j]);
+                    break;
+                default:     
+                    res =  theTypeIs + ' ' + Object.values(d.properties)[j];               
+            }            
+            return res; 
         }).call(wrap, 60);
 }
 
@@ -286,7 +303,21 @@ for (var i = 0; i < 3; i++) {
         .attr('class', 'small_text')
         .text(function(d) {
             theTypeIs = Object.keys(d.properties)[i];
-            return theTypeIs + ' ' + Object.values(d.properties)[i];;
+            var res = '';
+            switch(i) {
+                case 0:                    
+                    res = theTypeIs + ' ' + parseFloat(Object.values(d.properties)[i]).toFixed(2)+'%';        
+                    break;
+                case 1:                    
+                    res =  theTypeIs + ' ' + Object.values(d.properties)[i];
+                    break;
+                case 2:
+                    res = theTypeIs + ' ' + thousandForamt(Object.values(d.properties)[i]);
+                    break;
+                default:     
+                    res =  theTypeIs + ' ' + Object.values(d.properties)[i];               
+            }            
+            return res; 
         }).call(wrap, 60);
 }
 
