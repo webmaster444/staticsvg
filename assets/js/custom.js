@@ -118,11 +118,21 @@ payload_g_wrapper.append("text")
 var last_data = [{
     id:1,
     label:'CA Workload Automation',
-    sublabel:'Workflow Scheduling'
+    sublabel:'Workflow Scheduling',
+    properties:{
+        'Availability': 100,
+        'Active Workflows':50,
+        'Workflow Processed':20
+    }
 },{
     id:2,
     label:'Informatica',
-    sublabel:'Workflow Job Processing'
+    sublabel:'Workflow Job Processing',
+    properties:{
+        'Availability': 100,
+        'Active Workflows':50,
+        'Workflow Processed':20
+    }
 }];
 var g_wrapper = svg.selectAll('.payload_wrapper1').data(last_data).enter().append('g').attr('class', 'payload_wrapper1').attr("transform", "translate(0,470)");
 
@@ -137,6 +147,14 @@ var g_wrapper = svg.selectAll('.payload_wrapper1').data(last_data).enter().appen
         .attr("width", 450)
         .attr("height", 100)
         .attr('stroke', '#000');
+    
+    g_left.append("text")
+        .attr("x", 10)
+        .attr("y", 30)
+        .attr("dy", ".35em")
+        .text(function(d){return d.label})
+        .attr("class",'text-start')
+        .attr('text-anchor','start');
 
     var g_lr = g_left.append('g').attr("transform", "translate(230,0)");;
     var g_left_rect = g_lr.append("rect")
@@ -147,6 +165,12 @@ var g_wrapper = svg.selectAll('.payload_wrapper1').data(last_data).enter().appen
         .attr("width", 220)
         .attr("height", 80)
         .attr('stroke', '#000');
+    
+    g_lr.append("text")
+        .attr("x", 100)
+        .attr("y", -30)
+        .attr("dy", ".35em")
+        .text(function(d){return d.sublabel});        
 
     for (var i = 0; i < 3; i++) {
         var rect = g_lr.append("rect")
@@ -155,10 +179,21 @@ var g_wrapper = svg.selectAll('.payload_wrapper1').data(last_data).enter().appen
             .attr("x", function() {
                 return i * 67;
             })
-            .attr("y", -30)
+            .attr("y", -20)
             .attr("width", 65)
-            .attr("height", 60)
+            .attr("height", 50)
             .attr('class', 'end_item');
+        g_lr.append("text")
+            .attr("x", function(){
+                return 65*i + 35;
+            })
+            .attr("y", 0)
+            .attr("dy", ".35em")
+            .attr('class','small_text')
+            .text(function(d){
+                theTypeIs = Object.keys(d.properties)[i];
+                return theTypeIs +': '+Object.values(d.properties)[i];;
+            }).call(wrap, 60); 
     }
 
 

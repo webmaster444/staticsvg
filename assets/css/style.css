@@ -28,3 +28,11 @@ text{
 	font-size: 10px;
 	text-anchor: middle;
 }
+
+text.text-start{
+	text-anchor: start;
+}
+
+text.small_text{
+	font-size: 8px;
+}
