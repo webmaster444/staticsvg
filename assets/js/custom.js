@@ -20,51 +20,51 @@ var rect = svg.append("rect")
 //1st chart data
 var top_data = [{
     id: 1,
-    alabel: 'Ingest Ar',
+    alabel: 'Job Status',
     label: 'Ingest',
-    score: 1,
-    point: 0,
+    failures: 1,
+    overdue: 0,
     acolor: '#a60b10',
     properties: {
         'Availability': 100,
         'Active Jobs': 50,
-        'Records Processed': 20
+        'Records Processed': 1514
     }
 }, {
-    id: 1,
-    alabel: 'ODS Ar',
+    id: 2,
+    alabel: 'Job Status',
     label: 'ODS',
     acolor: '#b0cc9c',
-    score: 1,
-    point: 0,
+    failures: 0,
+    overdue: 0,
     properties: {
         'Availability': 100,
-        'Active Jobs': 50,
-        'Records Processed': 20
+        'Active Jobs': 32,
+        'Records Processed': 1277
     }
 }, {
-    id: 1,
-    alabel: 'Persist Ar',
+    id: 3,
+    alabel: 'Job Status',
     label: 'Persist',
-    score: 1,
+    failures: 0,
     acolor: '#c37340',
-    point: 0,
+    overdue: 1,
     properties: {
         'Availability': 100,
-        'Active Jobs': 50,
-        'Records Processed': 20
+        'Active Jobs': 46,
+        'Records Processed': 1201
     }
 }, {
-    id: 1,
-    alabel: 'Access Ar',
+    id: 4,
+    alabel: 'Job Status',
     label: 'Access',
-    score: 1,
-    point: 0,
+    failures: 0,
+    overdue: 0,
     acolor: '#b0cc9c',
     properties: {
         'Availability': 100,
-        'Active Jobs': 50,
-        'Records Processed': 20
+        'Active Jobs': 31,
+        'Records Processed': 1199
     }
 }]
 
@@ -112,7 +112,7 @@ g_flow_wrapper.append("text")
     .attr("dy", ".35em")
     .attr('class', 'small_text text-start')
     .text(function(d) {
-        return 'Score:    ' + d.score;
+        return 'Failures    ' + d.failures;
     })
     .call(wrap, 100);
 
@@ -122,7 +122,7 @@ g_flow_wrapper.append("text")
     .attr("dy", ".35em")
     .attr('class', 'small_text text-start')
     .text(function(d) {
-        return 'Point:    ' + d.point;
+        return 'Overdue    ' + d.overdue;
     })
     .call(wrap, 100);
 //Apend sub rects.
@@ -147,7 +147,7 @@ for (var j = 0; j < 3; j++) {
         .attr('class', 'small_text')
         .text(function(d) {
             theTypeIs = Object.keys(d.properties)[j];
-            return theTypeIs + ': ' + Object.values(d.properties)[j];
+            return theTypeIs + ' ' + Object.values(d.properties)[j];
         }).call(wrap, 60);
 }
 
@@ -212,7 +212,7 @@ var last_data = [{
     properties: {
         'Availability': 100,
         'Active Workflows': 50,
-        'Workflow Processed': 20
+        'Workflow Transitions': 512
     }
 }, {
     id: 2,
@@ -220,8 +220,8 @@ var last_data = [{
     sublabel: 'Workflow Job Processing',
     properties: {
         'Availability': 100,
-        'Active Workflows': 50,
-        'Workflow Processed': 20
+        'Active Jobs': 50,
+        'Records Processed': 9500
     }
 }];
 var g_wrapper = svg.selectAll('.payload_wrapper1').data(last_data).enter().append('g').attr('class', 'payload_wrapper1').attr("transform", "translate(0,470)");
@@ -252,9 +252,9 @@ var g_lr = g_left.append('g').attr("transform", "translate(230,0)");;
 var g_left_rect = g_lr.append("rect")
     .attr("rx", 6)
     .attr("ry", 6)
-    .attr("x", -10)
+    .attr("x", -50)
     .attr("y", -40)
-    .attr("width", 220)
+    .attr("width", 260)
     .attr("height", 80)
     .attr('stroke', '#000');
 
@@ -271,22 +271,22 @@ for (var i = 0; i < 3; i++) {
         .attr("rx", 6)
         .attr("ry", 6)
         .attr("x", function() {
-            return i * 67;
+            return i * 80 - 40;
         })
         .attr("y", -20)
-        .attr("width", 65)
+        .attr("width", 75)
         .attr("height", 50)
         .attr('class', 'end_item');
     g_lr.append("text")
         .attr("x", function() {
-            return 65 * i + 35;
+            return 80 * i;
         })
         .attr("y", 0)
         .attr("dy", ".35em")
         .attr('class', 'small_text')
         .text(function(d) {
             theTypeIs = Object.keys(d.properties)[i];
-            return theTypeIs + ': ' + Object.values(d.properties)[i];;
+            return theTypeIs + ' ' + Object.values(d.properties)[i];;
         }).call(wrap, 60);
 }
 
