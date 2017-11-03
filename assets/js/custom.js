@@ -23,6 +23,7 @@ var top_data = [{
     label:'Ingest',
     score:1,
     point:0,
+    acolor:'#a60b10',
     properties:{
         'Availability': 100,
         'Active Jobs':50,
@@ -32,6 +33,7 @@ var top_data = [{
     id:1,
     alabel:'ODS Ar',
     label:'ODS',
+    acolor:'#b0cc9c',
     score:1,
     point:0,
     properties:{
@@ -44,6 +46,7 @@ var top_data = [{
     alabel:'Persist Ar',
     label:'Persist',
     score:1,
+    acolor:'#c37340',
     point:0,
     properties:{
         'Availability': 100,
@@ -56,6 +59,7 @@ var top_data = [{
     label:'Access',
     score:1,
     point:0,
+    acolor:'#b0cc9c',
     properties:{
         'Availability': 100,
         'Active Jobs':50,
@@ -69,7 +73,9 @@ var top_data = [{
     //Append Arrow
     rect = g_flow_wrapper.append("path")
         .attr("d", drawArrow(0, 100, 100, 100, 50))
-        .style('stroke', '#c60d16');
+        .style('stroke', function(d){
+            return d.acolor;
+        });
 
     //Append Wrapper Rect
     rect = g_flow_wrapper.append("rect")
