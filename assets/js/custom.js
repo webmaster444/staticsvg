@@ -69,11 +69,7 @@ var clrm_payloading_texts = ['CLRM Landing Area for XML Files', 'ODS Acknowledge
 var clrm_paylaoding_title = 'CLRM Payload Processing';
 //CRM PAYLOAD PROCESSING SECTION
 var payload_g_wrapper = svg.append('g').attr('class', 'payload_wrapper').attr("transform", "translate(0,350)");
-payload_g_wrapper.append("text")
-    .attr("x", 10)
-    .attr("y", 20)
-    .attr("dy", ".35em")
-    .text(clrm_paylaoding_title);
+
 //Append container rect
 var payload_g_wrapper_rect = payload_g_wrapper.append("rect")
     .attr("rx", 6)
@@ -81,7 +77,7 @@ var payload_g_wrapper_rect = payload_g_wrapper.append("rect")
     .attr("x", 0)
     .attr("y", -50)
     .attr("width", 910)
-    .attr("height", 100)
+    .attr("height", 110)
     .attr('stroke', '#000');
 
 
@@ -113,10 +109,16 @@ var payload_g_wrapper_rect = payload_g_wrapper.append("rect")
         .text(function(d) { return d; })
         .call(wrap, 100);
 
-var g_wrapper = svg.append('g').attr('class', 'payload_wrapper').attr("transform", "translate(0,460)");
+payload_g_wrapper.append("text")
+    .attr("x", 460)
+    .attr("y", 50)
+    .attr("dy", ".35em")
+    .text(clrm_paylaoding_title);
+
+var g_wrapper = svg.append('g').attr('class', 'payload_wrapper').attr("transform", "translate(0,470)");
 for (var j = 0; j < 2; j++) {
     var g_left = g_wrapper.append('g').attr('transform', function() {
-        return "translate(" + j * 480 + ",0)";
+        return "translate(" + j * 460 + ",0)";
     });
     var g_left_rect = g_left.append("rect")
         .attr("rx", 6)
