@@ -83,31 +83,31 @@ var payload_g_wrapper_rect = payload_g_wrapper.append("rect")
 
 //Append 4 arrows and rects
 
-    var g_w = payload_g_wrapper.selectAll('.g_wrapper').data(clrm_payloading_texts).enter().append('g').attr('class', 'g_wrapper').attr('transform', function(d,i) {
-        return "translate(" + parseInt(i * 220 + 15) + ", 0)";
-    });
+var g_w = payload_g_wrapper.selectAll('.g_wrapper').data(clrm_payloading_texts).enter().append('g').attr('class', 'g_wrapper').attr('transform', function(d,i) {
+    return "translate(" + parseInt(i * 220 + 15) + ", 0)";
+});
 
-    rect = g_w.append("path")
-        .attr("d", drawArrow(0, -10, 100, 20, 10))
-        .style('fill', '#000')
-        .style('stroke', '#000');
+rect = g_w.append("path")
+    .attr("d", drawArrow(0, -10, 100, 20, 10))
+    .style('fill', '#000')
+    .style('stroke', '#000');
 
-    var rect_wrapper = g_w.append('g');
-    rect = rect_wrapper.append("rect")
-        .attr("rx", 6)
-        .attr("ry", 6)
-        .attr("x", 105)
-        .attr("y", -40)
-        .attr("width", 110)
-        .attr("height", 80)
-        .attr('class', 'end_item');
-    
-    rect_wrapper.append("text")
-        .attr("x", 160)
-        .attr("y", -5)
-        .attr("dy", ".35em")
-        .text(function(d) { return d; })
-        .call(wrap, 100);
+var rect_wrapper = g_w.append('g');
+rect = rect_wrapper.append("rect")
+    .attr("rx", 6)
+    .attr("ry", 6)
+    .attr("x", 105)
+    .attr("y", -40)
+    .attr("width", 110)
+    .attr("height", 80)
+    .attr('class', 'end_item');
+
+rect_wrapper.append("text")
+    .attr("x", 160)
+    .attr("y", -5)
+    .attr("dy", ".35em")
+    .text(function(d) { return d; })
+    .call(wrap, 100);
 
 payload_g_wrapper.append("text")
     .attr("x", 460)
@@ -115,9 +115,18 @@ payload_g_wrapper.append("text")
     .attr("dy", ".35em")
     .text(clrm_paylaoding_title);
 
-var g_wrapper = svg.append('g').attr('class', 'payload_wrapper').attr("transform", "translate(0,470)");
-for (var j = 0; j < 2; j++) {
-    var g_left = g_wrapper.append('g').attr('transform', function() {
+var last_data = [{
+    id:1,
+    label:'CA Workload Automation',
+    sublabel:'Workflow Scheduling'
+},{
+    id:2,
+    label:'Informatica',
+    sublabel:'Workflow Job Processing'
+}];
+var g_wrapper = svg.selectAll('.payload_wrapper1').data(last_data).enter().append('g').attr('class', 'payload_wrapper1').attr("transform", "translate(0,470)");
+
+    var g_left = g_wrapper.append('g').attr('transform', function(d,j) {
         return "translate(" + j * 460 + ",0)";
     });
     var g_left_rect = g_left.append("rect")
@@ -151,7 +160,7 @@ for (var j = 0; j < 2; j++) {
             .attr("height", 60)
             .attr('class', 'end_item');
     }
-}
+
 
 // Returns path data for a rectangle with rounded right corners.
 // Note: it’s probably easier to use a <rect> element with rx and ry attributes!
