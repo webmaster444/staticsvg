@@ -17,10 +17,55 @@ var rect = svg.append("rect")
     .attr("height", 520)
     .attr('stroke', '#000');
 
-for (var i = 0; i < 4; i++) {
-    var g_flow_wrapper = svg.append('g').attr('transform', function() {
+var top_data = [{
+    id:1,
+    alabel:'Ingest Ar',
+    label:'Ingest',
+    score:1,
+    point:0,
+    properties:{
+        'Availability': 100,
+        'Active Jobs':50,
+        'Records Processed':20
+    }
+},{
+    id:1,
+    alabel:'ODS Ar',
+    label:'ODS',
+    score:1,
+    point:0,
+    properties:{
+        'Availability': 100,
+        'Active Jobs':50,
+        'Records Processed':20
+    }
+},{
+    id:1,
+    alabel:'Persist Ar',
+    label:'Persist',
+    score:1,
+    point:0,
+    properties:{
+        'Availability': 100,
+        'Active Jobs':50,
+        'Records Processed':20
+    }
+},{
+    id:1,
+    alabel:'Access Ar',
+    label:'Access',
+    score:1,
+    point:0,
+    properties:{
+        'Availability': 100,
+        'Active Jobs':50,
+        'Records Processed':20
+    }
+}]
+
+    var g_flow_wrapper = svg.selectAll('.arrow_container').data(top_data).enter().append('g').attr('transform', function(d,i) {
         return "translate(" + i * 230 + ", 0)";
-    })
+    }).attr('class','arrow_container');
     //Append Arrow
     rect = g_flow_wrapper.append("path")
         .attr("d", drawArrow(0, 100, 100, 100, 50))
@@ -31,39 +76,65 @@ for (var i = 0; i < 4; i++) {
         .attr("rx", 6)
         .attr("ry", 6)
         .attr("x", 110)
-        .attr("y", 30)
+        .attr("y", 15)
         .attr("width", 110)
-        .attr("height", 250)
+        .attr("height", 270)
         .attr('stroke', '#000');
+    
+    g_flow_wrapper.append("text")
+        .attr("x", 160)
+        .attr("y", 25)
+        .attr("dy", ".35em")
+        .text(function(d) { return d.label; })
+        .call(wrap, 100);
 
+    g_flow_wrapper.append("text")
+        .attr("x", 40)
+        .attr("y", 135)
+        .attr("dy", ".35em")
+        .text(function(d) { return d.alabel; })
+        .call(wrap, 100);
+    
+    g_flow_wrapper.append("text")
+        .attr("x", 10)
+        .attr("y", 165)
+        .attr("dy", ".35em")
+        .attr('class','small_text text-start')
+        .text(function(d) { return 'Score:    ' + d.score; })
+        .call(wrap, 100);
+
+    g_flow_wrapper.append("text")
+        .attr("x", 10)
+        .attr("y", 155)
+        .attr("dy", ".35em")
+        .attr('class','small_text text-start')
+        .text(function(d) { return 'Point:    ' + d.point; })
+        .call(wrap, 100);        
     //Apend sub rects.
-    rect = g_flow_wrapper.append("rect")
+    for(var j=0;j<3;j++){
+        rect = g_flow_wrapper.append("rect")
         .attr("rx", 6)
         .attr("ry", 6)
         .attr("x", 120)
-        .attr("y", 40)
+        .attr("y", function(){
+            return(j*75 + 40)
+        })
         .attr("width", 90)
         .attr("height", 70)
         .attr('class', 'end_item');
 
-    rect = g_flow_wrapper.append("rect")
-        .attr("rx", 6)
-        .attr("ry", 6)
-        .attr("x", 120)
-        .attr("y", 120)
-        .attr("width", 90)
-        .attr("height", 70)
-        .attr('class', 'end_item');
-
-    rect = g_flow_wrapper.append("rect")
-        .attr("rx", 6)
-        .attr("ry", 6)
-        .attr("x", 120)
-        .attr("y", 200)
-        .attr("width", 90)
-        .attr("height", 70)
-        .attr('class', 'end_item');
-}
+        g_flow_wrapper.append("text")
+            .attr("x", 165)
+            .attr("y", function(){
+                return 70*j + 70;
+            })
+            .attr("dy", ".35em")
+            .attr('class','small_text')
+            .text(function(d){
+                theTypeIs = Object.keys(d.properties)[j];
+                return theTypeIs +': '+Object.values(d.properties)[j];
+            }).call(wrap, 60);
+    }
 
 var clrm_payloading_texts = ['CLRM Landing Area for XML Files', 'ODS Acknowledgement', 'Access Layer Completion', "Acknowledgement to Source"];
 var clrm_paylaoding_title = 'CLRM Payload Processing';
