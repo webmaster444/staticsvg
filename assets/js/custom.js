@@ -107,13 +107,11 @@ var payload_g_wrapper_rect = payload_g_wrapper.append("rect")
         .attr('class', 'end_item');
     
     rect_wrapper.append("text")
-      .attr("x", 205)
-      .attr("y", 30)
-      .attr("dy", ".35em")
-      .text(function(d) { return d; })
-      .call(wrap, 110);
-
-
+        .attr("x", 160)
+        .attr("y", -5)
+        .attr("dy", ".35em")
+        .text(function(d) { return d; })
+        .call(wrap, 100);
 
 var g_wrapper = svg.append('g').attr('class', 'payload_wrapper').attr("transform", "translate(0,460)");
 for (var j = 0; j < 2; j++) {
@@ -176,9 +174,10 @@ function wrap(text, width) {
         line = [],
         lineNumber = 0,
         lineHeight = 1.1, // ems
+        x= text.attr('x'),
         y = text.attr("y"),
         dy = parseFloat(text.attr("dy")),
-        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+        tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
     while (word = words.pop()) {
       line.push(word);
       tspan.text(line.join(" "));
@@ -186,7 +185,7 @@ function wrap(text, width) {
         line.pop();
         tspan.text(line.join(" "));
         line = [word];
-        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
       }
     }
   });
