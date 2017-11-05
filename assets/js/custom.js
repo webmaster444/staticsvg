@@ -246,6 +246,7 @@ var g_wrapper = svg.selectAll('.payload_wrapper1').data(last_data).enter().appen
 var g_left = g_wrapper.append('g').attr('transform', function(d, j) {
     return "translate(" + j * 460 + ",0)";
 });
+
 var g_left_rect = g_left.append("rect")
     .attr("rx", 6)
     .attr("ry", 6)
